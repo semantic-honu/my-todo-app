@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>タスク編集</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        form { margin-top: 20px; }
+        div { margin-bottom: 10px; }
+        label { display: block; font-weight: bold; }
+        input[type="text"] { width: 300px; padding: 5px; }
+        button { padding: 8px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<h1>タスクを編集</h1>
+<form action="#" th:action="@{/tasks/{id}(id=${task.id})}" th:object="${task}" method="post" novalidate>
+    <div>
+        <label for="title">タスク名:</label>
+        <input type="text" id="title" th:field="*{title}">
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red;">Title Error</span>
+    </div>
+    <div>
+        <label for="description">詳細:</label>
+        <input type="text" id="description" th:field="*{description}">
+    </div>
+    <div>
+        <input type="checkbox" id="completed" th:field="*{completed}">
+        <label for="completed">完了済み</label>
+    </div>
+    <button type="submit">更新</button>
+</form>
+<br>
+<a th:href="@{/tasks/{id}(id=${task.id})}">詳細に戻る</a>
+</body>
+</html>

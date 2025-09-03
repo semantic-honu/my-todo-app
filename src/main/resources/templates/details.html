@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${task.title}"></title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .completed { text-decoration: line-through; }
+        .details-section { margin-top: 20px; }
+        .details-item { margin-bottom: 10px; }
+        a, button { margin-right: 10px; }
+    </style>
+</head>
+<body>
+<h1 th:text="${task.title}" th:class="${task.completed} ? 'completed' : ''"></h1>
+
+<div class="details-section">
+    <div class="details-item">
+        <strong>ID:</strong> <span th:text="${task.id}"></span>
+    </div>
+    <div class="details-item">
+        <strong>詳細:</strong> <span th:text="${task.description}"></span>
+    </div>
+    <div class="details-item">
+        <strong>完了済み:</strong> <span th:text="${task.completed} ? 'はい' : 'いいえ'"></span>
+    </div>
+</div>
+
+<a th:href="@{/tasks/{id}/edit(id=${task.id})}" class="btn btn-primary">編集</a>
+
+<form th:action="@{/tasks/{id}/delete(id=${task.id})}" method="post" style="display:inline;">
+    <button type="submit" onclick="return confirm('本当に削除しますか？');" class="btn btn-danger">削除</button>
+</form>
+
+<br><br>
+<a th:href="@{/}">タスク一覧に戻る</a>
+</body>
+</html>
