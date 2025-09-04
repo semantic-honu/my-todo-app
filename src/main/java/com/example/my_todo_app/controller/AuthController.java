@@ -2,9 +2,11 @@ package com.example.my_todo_app.controller;
 
 import com.example.my_todo_app.model.User;
 import com.example.my_todo_app.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +23,10 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(Model model, String error) {
+        if (error != null) {
+            model.addAttribute("errorMessage", "ユーザー名かパスワードが間違っています");
+        }
         return "login";
     }
 
@@ -32,7 +37,15 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user) {
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+        // ユーザー名の重複チェック
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            result.addError(new org.springframework.validation.FieldError("user", "username", "このユーザー名は既に使用されています"));
+        }
+
+        if (result.hasErrors()) {
+            return "register";
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "redirect:/login";
