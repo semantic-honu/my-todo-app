@@ -40,7 +40,9 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll()
-                );
+                )
+                // CSRF保護を有効にする（デフォルトで有効だが明示的に記述）
+                .csrf(csrf -> csrf.configure(http));
         return http.build();
     }
 
