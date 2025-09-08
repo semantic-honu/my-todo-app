@@ -3,9 +3,7 @@ body {
     margin: 20px;
 }
 
-h1 {
-    color: #333;
-}
+
 
 form {
     margin-top: 20px;
@@ -66,16 +64,14 @@ li {
     border-radius: 5px;
 }
 
-/* Auth pages styles */
-.auth-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f8f9fa;
-    margin: 0; /* Reset body margin */
+/* Reset list style inside navbar */
+.navbar li {
+    background: transparent;
+    padding: 0;
+    margin: 0;
 }
 
+/* Auth pages styles */
 .auth-card {
     width: 100%;
     max-width: 450px;

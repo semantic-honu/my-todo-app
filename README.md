@@ -14,6 +14,7 @@
 
 *   ユーザー認証（登録・ログイン）
 *   タスクのCRUD（作成・一覧表示・詳細表示・更新・削除）
+*   スマートフォン・タブレット対応のレスポンシブデザイン
 
 ## 使用技術
 
@@ -25,6 +26,7 @@
     *   Spring Data JPA
 *   **フロントエンド:**
     *   Thymeleaf
+    *   Bootstrap
 *   **データベース:**
     *   H2 Database (インメモリ)
 *   **ビルドツール:**
@@ -52,5 +54,6 @@
 *   **Spring Framework:** [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 *   **Thymeleaf:** [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 *   **H2 Database Engine:** [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
+*   **Bootstrap:** [MIT License](https://opensource.org/license/MIT)
 
 各ライブラリの詳細なライセンス情報については、それぞれの公式サイトをご確認ください。

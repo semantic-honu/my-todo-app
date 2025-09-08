@@ -1,39 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${task.title}"></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
 <body>
-<div class="user-info" th:if="${username}">
-    <p>ようこそ, <span th:text="${username}"></span> さん</p>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-primary">ログアウト</button>
-    </form>
+
+<div th:replace="~{layout :: layout(title=${task.title}, username=${username}, content=~{::content})}">
+
+    <div th:fragment="content">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h1 class="mb-0" th:text="${task.title}" th:class="${task.completed} ? 'text-decoration-line-through text-muted' : ''"></h1>
+                <span th:text="${task.completed} ? '完了済み' : '未完了'" class="badge" th:classappend="${task.completed} ? 'bg-success' : 'bg-danger'"></span>
+            </div>
+            <div class="card-body">
+                <p class="card-text" th:text="${task.description}"></p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+                <a th:href="@{/tasks/{id}/edit(id=${task.id})}" class="btn btn-primary">編集</a>
+                <form th:action="@{/tasks/{id}/delete(id=${task.id})}" method="post" class="d-inline">
+                    <button type="submit" onclick="return confirm('本当に削除しますか？');" class="btn btn-danger">削除</button>
+                </form>
+                <a th:href="@{/}" class="btn btn-secondary">一覧に戻る</a>
+            </div>
+        </div>
+    </div>
+
 </div>
-<h1 th:text="${task.title}" th:class="${task.completed} ? 'completed' : ''"></h1>
 
-<div class="details-section">
-    <div class="details-item">
-        <strong>ID:</strong> <span th:text="${task.id}"></span>
-    </div>
-    <div class="details-item">
-        <strong>詳細:</strong> <span th:text="${task.description}"></span>
-    </div>
-    <div class="details-item">
-        <strong>完了済み:</strong> <span th:text="${task.completed} ? 'はい' : 'いいえ'"></span>
-    </div>
-</div>
-
-<a th:href="@{/tasks/{id}/edit(id=${task.id})}" class="btn btn-primary">編集</a>
-
-<form th:action="@{/tasks/{id}/delete(id=${task.id})}" method="post" style="display:inline;">
-    <button type="submit" onclick="return confirm('本当に削除しますか？');" class="btn btn-danger">削除</button>
-</form>
-
-<br><br>
-<a th:href="@{/}">タスク一覧に戻る</a>
 </body>
 </html>
