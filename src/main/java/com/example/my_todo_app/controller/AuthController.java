@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AuthController {
@@ -37,7 +38,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result,
+                               RedirectAttributes redirectAttributes) {
         // ユーザー名の重複チェック
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             result.addError(new org.springframework.validation.FieldError("user", "username", "このユーザー名は既に使用されています"));
@@ -48,6 +50,10 @@ public class AuthController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+
+        redirectAttributes.addFlashAttribute("successMessage",
+                "ユーザー登録が完了しました");
+
         return "redirect:/login";
     }
 }
