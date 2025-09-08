@@ -8,7 +8,7 @@
 
 ## スクリーンショット
 
-![スクリーンショット](images/screenshot1.png)
+![スクリーンショット](images/screenshot_v2.png)
 
 ## 主な機能
 
