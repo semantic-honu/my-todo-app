@@ -1,70 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ja">
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(title, username, content)"
+      lang="ja"
+      class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title} + ' | My Todo App'"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="d-flex flex-column h-100 bg-light">
 
-<!-- 
+<!--
   This is a layout fragment that can be used by other pages.
   It defines the overall structure (header, main content area, footer).
   - title: The page title.
   - username: The name of the logged-in user.
   - content: The main content of the specific page.
 -->
-<div th:fragment="layout(title, username, content)">
-    <!DOCTYPE html>
-    <html lang="ja" class="h-100">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title th:text="${title} + ' | My Todo App'"></title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" th:href="@{/css/style.css}">
-    </head>
-    <body class="d-flex flex-column h-100 bg-light">
-
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" th:href="@{/}">My Todo App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item" th:if="${username}">
-                            <span class="navbar-text me-3 text-white">
-                                ようこそ, <span th:text="${username}"></span> さん
-                            </span>
-                        </li>
-                        <li class="nav-item" th:if="${username}">
-                            <form th:action="@{/logout}" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-outline-light btn-sm">ログアウト</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main class="flex-shrink-0">
-        <div class="container mt-4">
-            <div th:replace="${content}">
-                <!-- Page content goes here -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">My Todo App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" th:if="${username}">
+                        <span class="navbar-text me-3 text-white">
+                            ようこそ, <span th:text="${username}"></span> さん
+                        </span>
+                    </li>
+                    <li class="nav-item" th:if="${username}">
+                        <form th:action="@{/logout}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-light btn-sm">ログアウト</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
-    </main>
+    </nav>
+</header>
 
-    <footer class="footer mt-auto py-3 bg-white border-top">
-        <div class="container text-center">
-            <span class="text-muted">© 2025 My Todo App</span>
+<main class="flex-shrink-0">
+    <div class="container mt-4">
+        <div th:replace="${content}">
+            <!-- Page content goes here -->
         </div>
-    </footer>
+    </div>
+</main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
-</div>
+<footer class="footer mt-auto py-3 bg-white border-top">
+    <div class="container text-center">
+        <span class="text-muted">このアプリは学習目的で公開されています。入力された内容は時間が経つと消えることがあります。個人情報は入力しないようお願いします。</span>
+    </div>
+</footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
