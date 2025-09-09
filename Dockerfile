@@ -19,6 +19,7 @@ COPY src ./src
 
 # Gradleを使ってアプリケーションをビルドする
 # テストは実行しない(--x test)ことでビルド時間を短縮できる
+RUN chmod +x ./gradlew
 RUN ./gradlew build --no-daemon -x test
 
 
