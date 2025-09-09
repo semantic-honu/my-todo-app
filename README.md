@@ -31,8 +31,14 @@
     *   H2 Database (インメモリ)
 *   **ビルドツール:**
     *   Gradle
+*   **コンテナ:**
+    *   Docker
 
-## セットアップと実行方法
+## 実行方法
+
+プロジェクトを実行するには、ローカル環境で直接実行する方法と、Dockerを使用する方法があります。
+
+### 1. ローカル環境での実行
 
 1.  リポジトリをクローンします。
     ```bash
@@ -46,6 +52,28 @@
     ```
 
 3.  ブラウザで `http://localhost:8080` にアクセスします。
+
+### 2. Dockerでの実行
+
+Dockerがインストールされている環境では、以下の手順でアプリケーションを実行できます。
+
+1.  リポジトリをクローンします。
+    ```bash
+    git clone https://github.com/semantic-honu/my-todo-app.git
+    cd my-todo-app
+    ```
+
+2.  以下のコマンドでDockerイメージをビルドします。
+    ```bash
+    docker build -t my-todo-app .
+    ```
+
+3.  ビルドしたイメージを使用してコンテナを起動します。
+    ```bash
+    docker run -p 8080:8080 my-todo-app
+    ```
+
+4.  ブラウザで `http://localhost:8080` にアクセスします。
 
 ## サードパーティライセンス
 
