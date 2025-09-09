@@ -12,18 +12,16 @@
                     <h1 class="text-center">新規登録</h1>
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/register}" th:object="${user}" method="post">
+                    <form th:action="@{/register}" th:object="${user}" method="post" novalidate>
                         <div class="mb-3">
                             <label for="username" class="form-label">ユーザー名:</label>
-                            <input type="text" id="username" th:field="*{username}" class="form-control">
-                            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
-                                 class="text-danger"></div>
+                            <input type="text" id="username" th:field="*{username}" class="form-control" th:errorclass="is-invalid">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">パスワード:</label>
-                            <input type="password" id="password" th:field="*{password}" class="form-control">
-                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                                 class="text-danger"></div>
+                            <input type="password" id="password" th:field="*{password}" class="form-control" th:errorclass="is-invalid">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">登録する</button>

@@ -15,17 +15,17 @@
                     <div th:if="${successMessage}" class="alert alert-success" role="alert">
                         <p class="mb-0" th:text="${successMessage}"></p>
                     </div>
-                    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-                        <p class="mb-0" th:text="${errorMessage}"></p>
-                    </div>
-                    <form th:action="@{/login}" method="post">
+                    <form th:action="@{/login}" method="post" novalidate>
+                        <div th:if="${errorMessage}" class="d-none"></div>
                         <div class="mb-3">
                             <label for="username" class="form-label">ユーザー名:</label>
-                            <input type="text" id="username" name="username" class="form-control" required>
+                            <input type="text" id="username" name="username" class="form-control" th:classappend="${errorMessage} ? 'is-invalid' : ''">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">パスワード:</label>
-                            <input type="password" id="password" name="password" class="form-control" required>
+                            <input type="password" id="password" name="password" class="form-control" th:classappend="${errorMessage} ? 'is-invalid' : ''">
+                            <div th:if="${errorMessage}" class="invalid-feedback" th:text="${errorMessage}">
+                            </div>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">ログイン</button>
