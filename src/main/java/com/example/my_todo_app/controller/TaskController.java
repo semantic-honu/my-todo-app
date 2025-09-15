@@ -33,7 +33,7 @@ public class TaskController {
     public String listTasks(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User currentUser = getCurrentUser(userDetails);
         model.addAttribute("username", currentUser.getUsername());
-        model.addAttribute("tasks", taskRepository.findByUser(currentUser));
+        model.addAttribute("tasks", taskRepository.findWithUserByUser(currentUser));
         return "index";
     }
 

@@ -49,7 +49,7 @@ public class TaskControllerTests {
     @Test
     @WithMockUser(username = "test_user")
     public void testListTasks() throws Exception {
-        when(taskRepository.findByUser(testUser)).thenReturn(Collections.emptyList());
+        when(taskRepository.findWithUserByUser(testUser)).thenReturn(Collections.emptyList());
 
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())// ステータスコードが200
